@@ -122,12 +122,15 @@ window.addEventListener('scroll', () => {
     navDots.forEach((dot, index) => {
         dot.classList.remove('active');
         
-        // Update all dots color based on current section
-        // Hero section (index 0) and Contact (index 5) have gradient background - use white dots
-        // Other sections have white/light background - use dark dots
+        // Update dot color based on current section background
+        // Hero section (index 0) has dark gradient - use white dots
+        // Contact section (index 5) has dark gradient - use white dots  
+        // Other sections (About, Skills, Experience, Portfolio) have light background - use dark dots
         if (currentIndex === 0 || currentIndex === 5) {
+            // Dark background sections - white dots
             dot.classList.remove('dark');
         } else {
+            // Light background sections - dark dots
             dot.classList.add('dark');
         }
         
