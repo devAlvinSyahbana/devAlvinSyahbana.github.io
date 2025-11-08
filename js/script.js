@@ -6,8 +6,15 @@ let scrollTimeout;
 let currentSectionIndex = 0;
 const sectionsArray = Array.from(document.querySelectorAll('section'));
 
+// Detect if device is mobile or touch device
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 // Debounce wheel events to prevent multiple triggers
 function handleWheel(e) {
+    // Disable on mobile for better native scrolling
+    if (isMobile || isTouchDevice) return;
+    
     if (isScrolling) return;
     
     clearTimeout(scrollTimeout);
@@ -566,4 +573,130 @@ window.addEventListener('load', () => {
             }
         }
     });
+});
+
+// Touch/Swipe Support for Mobile Navigation
+let touchStartY = 0;
+let touchEndY = 0;
+
+function handleSwipe() {
+    if (isMobile || isTouchDevice) {
+        const swipeThreshold = 50; // minimum distance for swipe
+        const swipeDistance = touchStartY - touchEndY;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe up - go to next section
+                const nextIndex = Math.min(currentSectionIndex + 1, sectionsArray.length - 1);
+                if (nextIndex !== currentSectionIndex) {
+                    currentSectionIndex = nextIndex;
+                    sectionsArray[nextIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            } else {
+                // Swipe down - go to previous section
+                const prevIndex = Math.max(currentSectionIndex - 1, 0);
+                if (prevIndex !== currentSectionIndex) {
+                    currentSectionIndex = prevIndex;
+                    sectionsArray[prevIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        }
+    }
+}
+
+document.addEventListener('touchstart', (e) => {
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+}, { passive: true });
+
+// Optimize Performance on Mobile
+if (isMobile || isTouchDevice) {
+    // Reduce animation complexity on mobile
+    document.body.classList.add('touch-device');
+    
+    // Disable heavy animations on older mobile devices
+    const isOldDevice = !window.CSS || !CSS.supports('backdrop-filter', 'blur(10px)');
+    if (isOldDevice) {
+        document.body.classList.add('reduced-animations');
+    }
+}
+
+// Viewport Height Fix for Mobile Browsers
+function setVH() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+window.addEventListener('resize', setVH);
+window.addEventListener('orientationchange', setVH);
+
+// Prevent zoom on double tap for iOS
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, { passive: false });
+
+// Debounce resize events
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        // Recalculate layouts on resize
+        const event = new Event('optimizedResize');
+        window.dispatchEvent(event);
+    }, 250);
+});
+
+// Lazy load images if needed (future enhancement)
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            }
+        });
+    });
+
+    // Observe images with data-src attribute
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Better scroll performance with passive listeners
+document.querySelectorAll('.portfolio-grid, .experience-timeline').forEach(element => {
+    element.addEventListener('scroll', () => {
+        // Handle scroll events
+    }, { passive: true });
+});
+
+// Log device info for debugging (can be removed in production)
+console.log('Device Info:', {
+    isTouchDevice,
+    isMobile,
+    viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight
+    },
+    userAgent: navigator.userAgent
 });
