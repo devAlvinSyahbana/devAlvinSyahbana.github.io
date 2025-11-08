@@ -1,12 +1,348 @@
-<!doctype html>
-   <html lang="en">
-   <head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width,initial-scale=1">
-     <title>devAlvinSyahbana — Portfolio</title>
-   </head>
-   <body>
-     <h1>My Portfolio</h1>
-     <p>Coming soon...</p>
-   </body>
-   </html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvin Syahbana - Software Engineer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Floating circles -->
+        <div class="floating circle circle1"></div>
+        <div class="floating circle circle2"></div>
+        <div class="floating circle circle3"></div>
+        
+        <!-- Geometric shapes -->
+        <div class="shape triangle"></div>
+        <div class="shape square"></div>
+        
+        <!-- Animated lines -->
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        
+        <!-- Particles -->
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 15%; animation-delay: 3.5s;"></div>
+        
+        <div class="hero-content">
+            <h1><span class="typewriter">Halo, Saya Alvin Syahbana</span></h1>
+            <p class="subtitle">Membangun solusi digital yang inovatif dan berkualitas</p>
+            <a href="#contact" class="cta-button">Hubungi Saya</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="text">Scroll Down</span>
+            <span class="arrow">↓</span>
+        </div>
+    </section>
+
+    <!-- Section Navigation Dots -->
+    <div class="section-nav">
+        <div class="nav-dot active" data-label="Home" onclick="scrollToSection('home')"></div>
+        <div class="nav-dot" data-label="Tentang" onclick="scrollToSection('about')"></div>
+        <div class="nav-dot" data-label="Keahlian" onclick="scrollToSection('skills')"></div>
+        <div class="nav-dot" data-label="Pengalaman" onclick="scrollToSection('experience')"></div>
+        <div class="nav-dot" data-label="Portofolio" onclick="scrollToSection('portfolio')"></div>
+        <div class="nav-dot" data-label="Kontak" onclick="scrollToSection('contact')"></div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-content">
+            <h2 class="section-title fade-in-section">Tentang Saya</h2>
+            <div class="about-content">
+                <div class="profile-img scale-in"><img class="profile-img scale-in" src="images/pp.jpg" alt="Alvin Syahbana Profile"></div>
+                <div class="about-text slide-in-right">
+                    <h3 style="color: #2d2d2d;">Alvin Syahbana</h3>
+                    <p>
+                        Saya adalah seorang software engineer yang passionate dalam mengembangkan aplikasi web dan mobile yang inovatif. 
+                        Dengan pengalaman lebih dari 5 tahun di industri teknologi, saya telah bekerja dengan berbagai teknologi modern 
+                        dan framework terkini.
+                    </p>
+                    <p>
+                        Saya percaya bahwa teknologi dapat mengubah dunia menjadi lebih baik. Oleh karena itu, saya selalu berusaha 
+                        untuk terus belajar dan berkembang dalam menciptakan solusi yang memberikan dampak positif.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-content">
+            <h2 class="section-title fade-in-section">Keahlian</h2>
+            <div class="skills-grid">
+                <div class="skill-card stagger-item">
+                    <div class="skill-icon">⚛️</div>
+                    <h3>Frontend Development</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-animate" style="width: 90%;" data-width="90%"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: #666;">React, Vue, Angular</p>
+                </div>
+
+                <div class="skill-card stagger-item">
+                    <div class="skill-icon">🔧</div>
+                    <h3>Backend Development</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-animate" style="width: 85%;" data-width="85%"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: #666;">Node.js, Python, Java, Golang</p>
+                </div>
+
+                <div class="skill-card stagger-item">
+                    <div class="skill-icon">💾</div>
+                    <h3>Database</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-animate" style="width: 80%;" data-width="80%"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: #666;">MySQL, MongoDB, PostgreSQL</p>
+                </div>
+
+                <div class="skill-card stagger-item">
+                    <div class="skill-icon">☁️</div>
+                    <h3>Cloud & DevOps</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-animate" style="width: 75%;" data-width="75%"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: #666;">Azure, Docker, Kubernetes</p>
+                </div>
+
+                <div class="skill-card stagger-item">
+                    <div class="skill-icon">📱</div>
+                    <h3>Mobile Development</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-animate" style="width: 70%;" data-width="70%"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: #666;">React Native, Flutter</p>
+                </div>
+
+                <div class="skill-card stagger-item">
+                    <div class="skill-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-animate" style="width: 75%;" data-width="75%"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: #666;">Figma, Adobe XD, Photoshop</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-content">
+            <h2 class="section-title fade-in-section">Pengalaman</h2>
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="experience-year">Jan 2025 - Sekarang</span>
+                        <h3 class="experience-title">Senior Full Stack Developer</h3>
+                        <p class="experience-company">PT Tristar Surya Gemilang</p>
+                        <p class="experience-description">
+                            Mengembangkan berbagai website dan aplikasi web untuk klien korporat. 
+                            Menangani full development cycle dari requirement gathering hingga deployment dan maintenance.
+                            Bertanggung jawab atas arsitektur sistem, code review, dan mentoring tim developer junior.
+                        </p>
+                        <div class="experience-tech">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">Golang</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">DevSecOps</span>
+                            <span class="tech-badge">Docker</span>
+                            <span class="tech-badge">AI</span>
+                            <span class="tech-badge">Redis</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="experience-year">May 2022 - Dec 2024</span>
+                        <h3 class="experience-title">Full Stack Developer</h3>
+                        <p class="experience-company">PT Tristar Surya Gemilang</p>
+                        <p class="experience-description">
+                            Mengembangkan berbagai website dan aplikasi web untuk klien korporat. 
+                            Menangani full development cycle dari requirement gathering hingga deployment dan maintenance.
+                        </p>
+                        <div class="experience-tech">
+                            <span class="tech-badge">Laravel</span>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Codeigniter</span>
+                            <span class="tech-badge">Golang</span>
+                            <span class="tech-badge">Express</span>
+                            <span class="tech-badge">TypeScript</span>
+                            <span class="tech-badge">Tailwind CSS</span>
+                            <span class="tech-badge">Azure Devops</span>
+                            <span class="tech-badge">Azure Data Factory</span>
+                            <span class="tech-badge">Rancher</span>
+                            <span class="tech-badge">CI/CD</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="experience-year">Aug 2021 - Apr 2022</span>
+                        <h3 class="experience-title">Frontend Developer</h3>
+                        <p class="experience-company">PT Narcon Global</p>
+                        <p class="experience-description">
+                            Fokus pada pengembangan user interface yang responsive dan user-friendly. 
+                            Berkolaborasi dengan designer dan backend developer untuk menciptakan experience terbaik dalam bidang kesehatan public yang ditunjukan untuk meningkatkan kesehatan masyarakat melalui edukasi yang sifatnya promotive, preventif dan kuratif.
+                        </p>
+                        <div class="experience-tech">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">React Native</span>
+                            <span class="tech-badge">TypeScript</span>
+                            <span class="tech-badge">Tailwind CSS</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="experience-year">Aug 2019 - Jul 2021</span>
+                        <h3 class="experience-title">Mid-Level Web Developer</h3>
+                        <p class="experience-company">PT Narcon Global</p>
+                        <p class="experience-description">
+                            Berkontribusi dalam berbagai project untuk kepentingan pelayanan medis, digital marketing & mangement dalam lingkup rumah sakit menggunakan modern web technologies.
+                        </p>
+                        </p>
+                        <div class="experience-tech">
+                            <span class="tech-badge">HTML/CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">Bootstrap</span>
+                            <span class="tech-badge">Codeigniter</span>
+                            <span class="tech-badge">SQL Server</span>
+                            <span class="tech-badge">Node js</span>
+                            <span class="tech-badge">Angular</span>
+                            <span class="tech-badge">ASP.NET</span>
+                            <span class="tech-badge">React</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="experience-year">Aug 2017 - Nov 2017</span>
+                        <h3 class="experience-title">Junior Web Developer</h3>
+                        <p class="experience-company">PT Astra Komponen Indonesia</p>
+                        <p class="experience-description">
+                            Memulai karir sebagai web developer dengan mempelajari best practices dalam software development. 
+                            Berkontribusi dalam pengembangan Web Application Document Management System dengan melaku kan migrasi & optimalisasi dari teknologi PHP Native ke Framework Codeigniter.
+                        </p>
+                        <div class="experience-tech">
+                            <span class="tech-badge">HTML/CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">Bootstrap</span>
+                            <span class="tech-badge">Codeigniter</span>
+                            <span class="tech-badge">SQL</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-hint">
+            <span>Scroll untuk melihat lebih banyak</span>
+            <span class="arrow-down">↓</span>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-content">
+            <h2 class="section-title fade-in-section">Portofolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item rotate-in">
+                    <img class="portfolio-img parallax" src="images/dmscover1.png">
+                    <div class="portfolio-content">
+                        <h3>DMS - Document Management System</h3>
+                        <div class="portfolio-description collapsed">
+                            <p>Document Management System (DMS) ASKI adalah aplikasi berbasis web yang digunakan untuk mengelola dokumen secara digital di lingkungan PT Astra Komponen Indonesia. Sistem ini menampilkan dashboard dengan empat kategori utama — dokumen baru, dokumen yang akan kedaluwarsa dua bulan lagi, bulan depan, dan bulan ini — lengkap dengan indikator warna untuk menunjukkan tingkat urgensi. Melalui menu Home, Help, Document, dan Admin, pengguna dapat dengan mudah memantau, memperbarui, serta mengatur dokumen sesuai masa berlakunya. DMS ini membantu perusahaan menjaga ketertiban arsip, efisiensi pengelolaan dokumen, dan mencegah keterlambatan pembaruan dokumen penting.</p>
+                        </div>
+                        <button class="show-more-btn" onclick="toggleDescription(this)">Selengkapnya</button>
+                        <div class="portfolio-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">Codeigniter</span>
+                            <span class="tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <span>Scroll untuk melihat lebih banyak</span>
+            <span class="arrow-down">↓</span>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: linear-gradient(135deg, #000000 0%, #2d2d2d 25%, #5a5a5a 50%, #8a8a8a 75%, #ffffff 100%);">
+        <div class="section-content">
+            <h2 class="section-title fade-in-section" style="color: white;">Hubungi Saya</h2>
+            <div class="contact-content scale-in">
+                <p style="color: rgba(255, 255, 255, 0.95);">Tertarik untuk berkolaborasi? Mari kita wujudkan proyek impian Anda bersama!</p>
+                <a href="mailto:dev.alvin.syahbana.work@gmail.com" class="cta-button">Kirim Email</a>
+                
+                <div class="social-links">
+                    <a href="https://github.com/devAlvinSyahbana" target="_blank" class="social-link stagger-item" title="GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/alvin-syahbana-3011a737b/" target="_blank" class="social-link stagger-item" title="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="mailto:dev.alvin.syahbana.work@gmail.com" class="social-link stagger-item" title="Email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#portfolio" class="social-link stagger-item" title="Portfolio">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Alvin Syahbana Software Engineer. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
