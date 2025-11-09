@@ -2,65 +2,14 @@
 let isScrolling = false;
 let scrollTimeout;
 
-// Enhanced scroll snapping with wheel event
+// Enhanced scroll snapping with wheel event - DISABLED
+// Auto-navigate on scroll has been removed for smoother free scrolling
 let currentSectionIndex = 0;
 const sectionsArray = Array.from(document.querySelectorAll('section'));
 
 // Detect if device is mobile or touch device
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-// Debounce wheel events to prevent multiple triggers
-function handleWheel(e) {
-    // Disable on mobile for better native scrolling
-    if (isMobile || isTouchDevice) return;
-    
-    if (isScrolling) return;
-    
-    clearTimeout(scrollTimeout);
-    
-    scrollTimeout = setTimeout(() => {
-        const direction = e.deltaY > 0 ? 1 : -1;
-        
-        // Calculate target section
-        let targetIndex = currentSectionIndex + direction;
-        
-        // Boundary check
-        if (targetIndex < 0) targetIndex = 0;
-        if (targetIndex >= sectionsArray.length) targetIndex = sectionsArray.length - 1;
-        
-        // Only scroll if target is different
-        if (targetIndex !== currentSectionIndex) {
-            isScrolling = true;
-            currentSectionIndex = targetIndex;
-            
-            sectionsArray[targetIndex].scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            
-            // Reset scrolling flag after animation
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1000);
-        }
-    }, 50);
-}
-
-// Add wheel event listener with passive false to allow preventDefault
-window.addEventListener('wheel', handleWheel, { passive: true });
-
-// Update current section index on scroll
-window.addEventListener('scroll', () => {
-    if (!isScrolling) {
-        sectionsArray.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top >= -10 && rect.top <= 10) {
-                currentSectionIndex = index;
-            }
-        });
-    }
-});
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
