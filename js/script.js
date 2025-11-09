@@ -652,3 +652,218 @@ console.log('Device Info:', {
     },
     userAgent: navigator.userAgent
 });
+
+// Image Modal Functions
+let currentZoom = 1;
+let currentX = 0;
+let currentY = 0;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+
+function openImageModal(imgElement) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const caption = document.getElementById('modalCaption');
+    
+    modal.classList.add('show');
+    modalImg.src = imgElement.src;
+    caption.textContent = imgElement.alt;
+    
+    // Reset zoom and position
+    currentZoom = 1;
+    currentX = 0;
+    currentY = 0;
+    updateImageTransform();
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('show');
+    
+    // Reset zoom and position
+    currentZoom = 1;
+    currentX = 0;
+    currentY = 0;
+    
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+}
+
+function updateImageTransform() {
+    const modalImg = document.getElementById('modalImage');
+    if (modalImg) {
+        modalImg.style.transform = `scale(${currentZoom}) translate(${currentX}px, ${currentY}px)`;
+    }
+}
+
+function zoomIn() {
+    if (currentZoom < 5) {
+        currentZoom += 0.25;
+        updateImageTransform();
+    }
+}
+
+function zoomOut() {
+    if (currentZoom > 0.5) {
+        currentZoom -= 0.25;
+        // Reset position if zooming out to original size or less
+        if (currentZoom <= 1) {
+            currentX = 0;
+            currentY = 0;
+        }
+        updateImageTransform();
+    }
+}
+
+function resetZoom() {
+    currentZoom = 1;
+    currentX = 0;
+    currentY = 0;
+    updateImageTransform();
+}
+
+// Close modal when clicking outside the image
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('imageModal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalImg = document.getElementById('modalImage');
+    const imageContainer = document.querySelector('.modal-image-container');
+    const zoomInBtn = document.querySelector('.zoom-in');
+    const zoomOutBtn = document.querySelector('.zoom-out');
+    const zoomResetBtn = document.querySelector('.zoom-reset');
+    
+    // Close button click
+    if (modalClose) {
+        modalClose.addEventListener('click', closeImageModal);
+    }
+    
+    // Zoom controls
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            zoomIn();
+        });
+    }
+    
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            zoomOut();
+        });
+    }
+    
+    if (zoomResetBtn) {
+        zoomResetBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetZoom();
+        });
+    }
+    
+    // Mouse wheel zoom
+    if (imageContainer) {
+        imageContainer.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                zoomIn();
+            } else {
+                zoomOut();
+            }
+        }, { passive: false });
+        
+        // Drag functionality
+        imageContainer.addEventListener('mousedown', (e) => {
+            if (currentZoom > 1 && e.target === modalImg) {
+                isDragging = true;
+                startX = e.clientX - currentX;
+                startY = e.clientY - currentY;
+                imageContainer.classList.add('dragging');
+            }
+        });
+        
+        imageContainer.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - startX;
+                currentY = e.clientY - startY;
+                updateImageTransform();
+            }
+        });
+        
+        imageContainer.addEventListener('mouseup', () => {
+            isDragging = false;
+            imageContainer.classList.remove('dragging');
+        });
+        
+        imageContainer.addEventListener('mouseleave', () => {
+            isDragging = false;
+            imageContainer.classList.remove('dragging');
+        });
+        
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let initialDistance = 0;
+        let initialZoom = 1;
+        
+        imageContainer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1 && currentZoom > 1) {
+                // Single touch - drag
+                isDragging = true;
+                touchStartX = e.touches[0].clientX - currentX;
+                touchStartY = e.touches[0].clientY - currentY;
+            } else if (e.touches.length === 2) {
+                // Two finger pinch - zoom
+                isDragging = false;
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                initialDistance = Math.sqrt(dx * dx + dy * dy);
+                initialZoom = currentZoom;
+            }
+        });
+        
+        imageContainer.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1 && isDragging) {
+                e.preventDefault();
+                currentX = e.touches[0].clientX - touchStartX;
+                currentY = e.touches[0].clientY - touchStartY;
+                updateImageTransform();
+            } else if (e.touches.length === 2) {
+                e.preventDefault();
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const scale = distance / initialDistance;
+                currentZoom = Math.max(0.5, Math.min(5, initialZoom * scale));
+                if (currentZoom <= 1) {
+                    currentX = 0;
+                    currentY = 0;
+                }
+                updateImageTransform();
+            }
+        }, { passive: false });
+        
+        imageContainer.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+    }
+    
+    // Click outside image to close
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.classList.contains('modal-image-container')) {
+                closeImageModal();
+            }
+        });
+    }
+    
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeImageModal();
+        }
+    });
+});

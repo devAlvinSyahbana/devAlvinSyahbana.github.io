@@ -872,6 +872,13 @@ section[style*="gradient"] .section-title::after {
   border-radius: 15px 15px 0 0;
   overflow: hidden;
   background: linear-gradient(135deg, #f1f1f3 0%, #f1f1f1 100%);
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.portfolio-img:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 .portfolio-content {
@@ -2779,5 +2786,186 @@ img {
     -webkit-animation: gradientShift 15s ease infinite !important;
     -moz-animation: gradientShift 15s ease infinite !important;
     animation: gradientShift 15s ease infinite !important;
+  }
+}
+
+/* Image Modal */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.95);
+  animation: fadeIn 0.3s ease-in;
+}
+
+.image-modal.show {
+  display: block;
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 85vh;
+  object-fit: contain;
+  animation: zoomIn 0.3s ease-in;
+  border-radius: 8px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10001;
+  line-height: 1;
+  user-select: none;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #bbb;
+  transform: scale(1.1);
+}
+
+.modal-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 150px);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.modal-image-container.dragging {
+  cursor: grabbing;
+}
+
+.modal-content {
+  transition: transform 0.3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.modal-zoom-controls {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10002;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.zoom-btn {
+  width: 45px;
+  height: 45px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  user-select: none;
+}
+
+.zoom-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.zoom-btn:active {
+  transform: scale(0.95);
+}
+
+.modal-caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 20px 0;
+  font-size: 18px;
+  animation: fadeIn 0.5s ease-in 0.2s both;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-content {
+    max-width: 95%;
+    max-height: 80vh;
+  }
+
+  .modal-close {
+    top: 10px;
+    right: 20px;
+    font-size: 40px;
+  }
+
+  .modal-caption {
+    font-size: 16px;
+    width: 90%;
+  }
+
+  .image-modal {
+    padding-top: 30px;
+  }
+
+  .modal-zoom-controls {
+    top: 10px;
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .zoom-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .modal-image-container {
+    height: calc(100vh - 120px);
   }
 }
